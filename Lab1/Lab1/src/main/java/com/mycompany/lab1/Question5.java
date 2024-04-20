@@ -30,6 +30,7 @@ public class Question5 {
     }
 
     public void removeFSE() {
+        System.out.println("Question a: ");
         System.out.println("xoa so " + choosenNumToRemv);
         for (int i = 0; i < numbers.size(); i++) {
             if (numbers.get(i) == choosenNumToRemv) {
@@ -50,13 +51,14 @@ public class Question5 {
     }
 
     public void insertEleToPosition() {
-
+        System.out.println("Question b: ");
         numbers.add(position, choosenNumToInst);
         numbers.remove(numbers.size() - 1);
         System.out.println("Updated list: " + numbers);
     }
 
     public void findDuplicate() {
+        System.out.println("Question c: ");
         Collections.sort(numbers);
         for (int i = 1; i < numbers.size(); i++) {
             if (numbers.get(i) == numbers.get(i - 1)) {
@@ -67,6 +69,7 @@ public class Question5 {
     }
 
     public void rmvDuplicate() {
+        System.out.println("Question d: ");
         Collections.sort(numbers);
         for (int i = 1; i < numbers.size(); i++) {
             if (numbers.get(i) == numbers.get(i - 1)) {
