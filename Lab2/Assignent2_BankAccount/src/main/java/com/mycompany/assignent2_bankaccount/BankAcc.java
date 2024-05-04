@@ -38,17 +38,17 @@ public class BankAcc {
     }
 
     public void Input(Scanner sc) {
-        System.out.print("");
+        System.out.print("Nhap so tk: ");
         mAccNum = sc.nextInt();
         sc.nextLine();
-        System.out.print("");
+        System.out.print("Nhap ten khach hang: ");
         mName = sc.nextLine();
-        System.out.print("");
+        System.out.print("Nhap so tien trong tai khoan hien co: ");
         mBalance = sc.nextDouble();
     }
 
     public void Print() {
-
+        System.out.println(mAccNum+" "+mName+" "+mBalance);
     }
 
     public String ToString() {
@@ -59,13 +59,33 @@ public class BankAcc {
         this.mBalance += money;
     }
 
-    public boolean Withdraw() {
-        return false;
+    public boolean Withdraw(double amount) {
+        if (amount <= 0) {
+            System.out.println("Khong hop le!");
+            return false;
+        }
+        if (amount > mBalance) {
+            System.out.println("Kkhong du tien!");
+            return false;
+        }
+        mBalance -= amount;
+        System.out.println("Rut thanh cong!");
+        return true;
     }
-    public boolean TransferMoney() {
-        return false;
+
+    public boolean TransferMoney(BankAcc acc, double money) {
+        if (money <= 0) {
+            return false;
+        }
+        if (money > this.mBalance) {
+            return false;
+        }
+        this.Withdraw(money);
+        acc.Deposit(money);
+        return true;
     }
-    public boolean CompareAccountNumber() {
-        return false;
+
+    public boolean CompareAccountNumber(int acc) {
+        return acc == this.mAccNum;
     }
 }
