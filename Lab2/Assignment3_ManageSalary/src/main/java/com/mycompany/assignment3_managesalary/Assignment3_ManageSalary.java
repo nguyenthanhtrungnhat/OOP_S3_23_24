@@ -11,7 +11,9 @@ package com.mycompany.assignment3_managesalary;
 public class Assignment3_ManageSalary {
 
     public static void main(String[] args) {
-       // System.out.println("Hello World!");
-       
+     Employee employee =new Employee();
+     employee.Input();
+     employee.Output();
+             
     }
 }
