@@ -32,6 +32,5 @@ public class Assighment1_ComplexNumber {
 
         System.out.print("So phuc sau khi chia la: ");
         complexNumber1.divFunction(complexNumber2).Output();
-        //test
     }
 }
