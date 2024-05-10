@@ -12,7 +12,11 @@ import java.util.*;
 public class Assighment1_ComplexNumber {
 
     public static void main(String[] args) {
+<<<<<<< HEAD
 //test git line
+=======
+//test
+>>>>>>> 90fa1de28bd349fc4c4d5562dc38980a37af9282
         ComplexNumber complexNumber1 = new ComplexNumber();
         System.out.println("Nhap vao so phuc dau tien!");
         complexNumber1.Input();
