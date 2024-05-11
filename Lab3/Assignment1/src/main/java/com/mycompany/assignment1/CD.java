@@ -6,6 +6,7 @@ package com.mycompany.assignment1;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  *
@@ -33,14 +34,56 @@ public class CD {
         this.yearOfRelease = yearOfRelease;
     }
 
-   
-
     public void Input() {
+        Scanner sc = new Scanner(System.in);
         System.out.print("How many CDs: ");
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            System.out.println("");
+            id = sc.next();
+            collcetion = sc.next();
+            type = sc.next();
+            title = sc.next();
+            price = sc.nextDouble();
+            yearOfRelease = sc.nextInt();
+            CD cd = new CD(id, collcetion, type, title, price, yearOfRelease);
+            list.add(cd);
+        }
     }
 
-    public void Output() {
+    public void Exit() {
+        
+    }
 
+    public void sortByYor() {
+
+    }
+
+    public void editInformationById() {
+
+    }
+
+    public void searchByType() {
+
+    }
+
+    public void searchByCollection() {
+
+    }
+
+    public void searchByTitle() {
+
+    }
+
+    public void deleteCdById() {
+
+    }
+
+    public void DisplayAllCds() {
+        for (CD each : list) {
+            System.out.println("All CDs: ");
+            System.out.println(each.id + " " + each.collcetion + " " + each.type + " " + each.title + " " + each.price + " " + each.yearOfRelease);
+        }
     }
 
 }
