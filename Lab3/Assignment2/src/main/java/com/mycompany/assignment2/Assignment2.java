@@ -126,15 +126,24 @@ public class Assignment2 {
     }
 
     private static void showAllFullTimeEmployees() {
-        // Implement displaying all full-time employees
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+        }
     }
 
     private static void showAllPartTimeEmployees() {
-        // Implement displaying all part-time employees
+        for (ParttimeEmployee each : partTimeEmployees) {
+            System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+        }
     }
 
     private static void showAllEmployees() {
-        // Implement displaying all employees
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+        }
+        for (ParttimeEmployee each : partTimeEmployees) {
+            System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+        }
     }
 
     private static void searchEmployeeById() {
