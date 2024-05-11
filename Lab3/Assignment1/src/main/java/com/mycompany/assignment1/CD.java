@@ -26,6 +26,7 @@ public class CD {
     Scanner sc = new Scanner(System.in);
 
     public CD() {
+        
     }
 
     public CD(String id, String collcetion, String type, String title, double price, int yearOfRelease) {
