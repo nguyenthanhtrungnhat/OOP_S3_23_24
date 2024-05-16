@@ -258,29 +258,48 @@ public class Assignment2 {
     }
 
     private static void searchEmployeeByPayment() {
-        System.out.print("Enter payment: ");
-        float temp = sc.nextFloat();
+        System.out.print("Enter the minimum payment: ");
+        float minPayment = sc.nextFloat();
+        System.out.print("Enter the maximum payment: ");
+        float maxPayment = sc.nextFloat();
         boolean found = false;
+
+        System.out.println("Full-time Employees within payment range:");
         for (FulltimeEmployee each : fullTimeEmployees) {
-            if (each.calculatePayment() == temp) {
+            float payment = each.calculatePayment();
+            if (payment >= minPayment && payment <= maxPayment) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + payment);
                 found = true;
-                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
             }
         }
+
+        System.out.println("Part-time Employees within payment range:");
         for (ParttimeEmployee each : partTimeEmployees) {
-            if (each.calculatePayment() == temp) {
+            float payment = each.calculatePayment();
+            if (payment >= minPayment && payment <= maxPayment) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + payment);
                 found = true;
-                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
             }
         }
+
         if (!found) {
-            System.out.println("Payment not exist!");
+            System.out.println("No employees found within the given payment range.");
         }
     }
 
     private static void sortEmployees() {
-        // Implement sorting full-time and part-time employees by age and payment
+        Comparator<Employee> byAge = Comparator.comparingInt(Employee::getYearOfBirth);
+        Comparator<Employee> byPayment = Comparator.comparingDouble(Employee::calculatePayment);
+        Comparator<Employee> byAgeThenPayment = byAge.thenComparing(byPayment);
 
+        fullTimeEmployees.sort(byAgeThenPayment);
+        partTimeEmployees.sort(byAgeThenPayment);
+
+        System.out.println("Sorted Full-time Employees:");
+        showAllFullTimeEmployees();
+
+        System.out.println("Sorted Part-time Employees:");
+        showAllPartTimeEmployees();
     }
 
 }
