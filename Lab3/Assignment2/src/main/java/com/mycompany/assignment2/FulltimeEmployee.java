@@ -24,8 +24,6 @@ public class FulltimeEmployee extends Employee {
         this.salary = salary;
     }
 
-    
-
     @Override
     public float calculatePayment() {
         return salary;

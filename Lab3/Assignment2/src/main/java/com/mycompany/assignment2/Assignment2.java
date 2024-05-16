@@ -87,6 +87,12 @@ public class Assignment2 {
             float salary = sc.nextFloat();
             System.out.print("Enter id: ");
             String id = sc.next();
+            for (FulltimeEmployee each : fullTimeEmployees) {
+                if (each.getEmployeeId().equals(id)) {
+                    System.out.println("ID exixsted!");
+                    break;
+                }
+            }
             System.out.print("Enter name: ");
             String name = sc.next();
             System.out.print("Enter year of birth: ");
@@ -112,6 +118,12 @@ public class Assignment2 {
             float payRates = sc.nextFloat();
             System.out.print("Enter id: ");
             String id = sc.next();
+            for (ParttimeEmployee each : partTimeEmployees) {
+                if (each.getEmployeeId().equals(id)) {
+                    System.out.println("ID exixsted!");
+                    break;
+                }
+            }
             System.out.print("Enter name: ");
             String name = sc.next();
             System.out.print("Enter year of birth: ");
@@ -149,45 +161,126 @@ public class Assignment2 {
     private static void searchEmployeeById() {
         System.out.print("Enter id: ");
         String temp = sc.next();
+        boolean found = false;
         for (FulltimeEmployee each : fullTimeEmployees) {
             if (each.getEmployeeId().equals(temp)) {
+                found = true;
                 System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
                 break;
             }
         }
         for (ParttimeEmployee each : partTimeEmployees) {
             if (each.getEmployeeId().equals(temp)) {
+                found = true;
                 System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
                 break;
             }
         }
+        if (!found) {
+            System.out.println("ID not exist!");
+        }
     }
 
     private static void deleteEmployeeById() {
-        // Implement deleting employee by ID
+        System.out.print("Enter id: ");
+        String temp = sc.next();
+        boolean found = false;
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                found = true;
+                fullTimeEmployees.remove(each);
+                System.out.println("Removed! " + "ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+                break;
+            }
+        }
+        for (ParttimeEmployee each : partTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                found = true;
+                partTimeEmployees.remove(each);
+                System.out.println("Removed! " + "ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("ID not exist!");
+        }
     }
 
     private static void editEmployeeById() {
-        // Implement editing employee information by ID
+        System.out.print("Enter id: ");
+        String temp = sc.next();
+        boolean found = false;
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                found = true;
+                fullTimeEmployees.remove(each);
+                System.out.print("Enter salary: ");
+                float salary = sc.nextFloat();
+                String id = temp;
+                System.out.print("Enter name: ");
+                String name = sc.next();
+                System.out.print("Enter year of birth: ");
+                int yob = sc.nextInt();
+                System.out.print("Enter address: ");
+                String address = sc.next();
+                System.out.print("Enter phone: ");
+                String phone = sc.next();
+                FulltimeEmployee femployee = new FulltimeEmployee(salary, id, name, yob, address, phone);
+                fullTimeEmployees.add(femployee);
+                break;
+            }
+        }
+        for (ParttimeEmployee each : partTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                found = true;
+                partTimeEmployees.remove(each);
+                System.out.print("Enter working hours: ");
+                float workingHours = sc.nextFloat();
+                System.out.print("Enter pay rates: ");
+                float payRates = sc.nextFloat();
+                String id = temp;
+                System.out.print("Enter name: ");
+                String name = sc.next();
+                System.out.print("Enter year of birth: ");
+                int yob = sc.nextInt();
+                System.out.print("Enter address: ");
+                String address = sc.next();
+                System.out.print("Enter phone: ");
+                String phone = sc.next();
+                ParttimeEmployee pe = new ParttimeEmployee(workingHours, payRates, id, name, yob, address, phone);
+                partTimeEmployees.add(pe);
+                break;
+            }
+        }
+        if (!found) {
+            System.out.println("ID not exist!");
+        }
     }
 
     private static void searchEmployeeByPayment() {
         System.out.print("Enter payment: ");
         float temp = sc.nextFloat();
+        boolean found = false;
         for (FulltimeEmployee each : fullTimeEmployees) {
             if (each.calculatePayment() == temp) {
+                found = true;
                 System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
             }
         }
         for (ParttimeEmployee each : partTimeEmployees) {
             if (each.calculatePayment() == temp) {
+                found = true;
                 System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
             }
+        }
+        if (!found) {
+            System.out.println("Payment not exist!");
         }
     }
 
     private static void sortEmployees() {
         // Implement sorting full-time and part-time employees by age and payment
+
     }
 
 }
