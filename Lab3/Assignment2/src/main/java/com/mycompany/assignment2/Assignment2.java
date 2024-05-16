@@ -147,7 +147,20 @@ public class Assignment2 {
     }
 
     private static void searchEmployeeById() {
-        // Implement searching employee by ID
+        System.out.print("Enter id: ");
+        String temp = sc.next();
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+                break;
+            }
+        }
+        for (ParttimeEmployee each : partTimeEmployees) {
+            if (each.getEmployeeId().equals(temp)) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+                break;
+            }
+        }
     }
 
     private static void deleteEmployeeById() {
@@ -159,7 +172,18 @@ public class Assignment2 {
     }
 
     private static void searchEmployeeByPayment() {
-        // Implement searching employee by payment range
+        System.out.print("Enter payment: ");
+        float temp = sc.nextFloat();
+        for (FulltimeEmployee each : fullTimeEmployees) {
+            if (each.calculatePayment() == temp) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+            }
+        }
+        for (ParttimeEmployee each : partTimeEmployees) {
+            if (each.calculatePayment() == temp) {
+                System.out.println("ID: " + each.getEmployeeId() + " ,Name: " + each.getEmployeeName() + " ,Year of Birth: " + each.getYearOfBirth() + " ,Address: " + each.getAddress() + " ,Phone: " + each.getPhone() + " ,Payment: " + each.calculatePayment());
+            }
+        }
     }
 
     private static void sortEmployees() {
