@@ -4,7 +4,6 @@
 package com.mycompany.assignment3_polymorphism;
 
 import java.util.Scanner;
-import java.util.Vector;
 
 /**
  *
@@ -14,7 +13,7 @@ public class Assignment3_Polymorphism {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        Vector<Student> vector = new Vector();
+
         while (true) {
             System.out.println("Menu:");
             System.out.println(" 1. Add a new college student.");
@@ -28,33 +27,29 @@ public class Assignment3_Polymorphism {
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
-
+            Manage m = new Manage();
             switch (choice) {
                 case 1:
-                    College_students college_students = new College_students();
-                    college_students.addCollegeStudent();
-                    vector.add(college_students);
+                    m.addCol();
                     break;
                 case 2:
-                    University_students university_students = new University_students();
-                    university_students.addUniversityStudent();
-                    vector.add(university_students);
+                    m.addUni();
                     break;
                 case 3:
-
+                    m.deleteById();
                     break;
 
                 case 4:
-                  //  printAllStudent();
+                    m.printStudentList();
                     break;
                 case 5:
-                  //  printGraduation();
+                    //  printGraduation();
                     break;
                 case 6:
-                  //s  sortByTypeAndCode();
+                    //s  sortByTypeAndCode();
                     break;
                 case 7:
-                 //   findByName();
+                    //   findByName();
                     break;
                 case 8:
                     System.out.println("Exiting...");
