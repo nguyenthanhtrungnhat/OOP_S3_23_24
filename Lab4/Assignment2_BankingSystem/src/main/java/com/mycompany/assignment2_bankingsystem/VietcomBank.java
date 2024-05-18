@@ -8,6 +8,11 @@ package com.mycompany.assignment2_bankingsystem;
  *
  * @author Dell
  */
-public class VietcomBank {
+public class VietcomBank implements Bank{
+
+    @Override
+    public String getBankName() {
+        return "VIETCOMBANK";
+    }
     
 }
