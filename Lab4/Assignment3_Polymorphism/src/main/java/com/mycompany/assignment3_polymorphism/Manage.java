@@ -49,4 +49,10 @@ public class Manage {
             System.out.println(student.getInfo());
         }
     }
+    public void Function(){
+        
+    }
+    public void findName(){
+        
+    }
 }

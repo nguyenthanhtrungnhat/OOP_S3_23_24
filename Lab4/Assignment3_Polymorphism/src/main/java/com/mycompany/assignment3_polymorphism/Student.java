@@ -18,7 +18,7 @@ abstract class Student {
     private int credit;
     private double averageScore;
     private Scanner sc = new Scanner(System.in);
-    private Vector<Student> vector = new Vector();
+   
 
     public Student() {
     }
@@ -60,29 +60,8 @@ abstract class Student {
         double averageScore = sc.nextDouble();
     }
 
-    public void deleteById(Vector<Student> vector) {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter ID to delete: ");
-        String idToDelete = sc.next();
-        for (int i = 0; i < vector.size(); i++) {
-            if (vector.get(i).getId().equals(idToDelete)) {
-                vector.remove(i);
-                System.out.println("Student with ID " + idToDelete + " has been removed.");
+    
 
-            }
-        }
-    }
-
-    public void printStudentList() {
-        for (Student student : vector) {
-            System.out.println(student.getInfo());
-        }
-    }
-
-    public void addUni() {
-        University_students university_students = new University_students();
-        university_students.addUniversityStudent();
-        vector.add(university_students);
-    }
+    
 
 }

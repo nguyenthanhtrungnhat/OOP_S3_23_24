@@ -59,6 +59,7 @@ public class University_students extends Student {
             System.out.print("Enter student thesis score: ");
             double thesisScore = sc.nextDouble();
         }
+        
     }
 
 }
