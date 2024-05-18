@@ -31,12 +31,12 @@ public class Assignment1_Dictionary {
                 System.out.println("The word '" + word + "' does not exist in the dictionary.");
             }
 
-            System.out.println("Tree Function!");
-            if (dictionary.wordExistsTree(word)) {
-                System.out.println("The meaning of '" + word + "' is: " + dictionary.findMeaningTree(word));
-            } else {
-                System.out.println("The word '" + word + "' does not exist in the dictionary.");
-            }
+//            System.out.println("Tree Function!");
+//            if (dictionary.wordExistsTree(word)) {
+//                System.out.println("The meaning of '" + word + "' is: " + dictionary.findMeaningTree(word));
+//            } else {
+//                System.out.println("The word '" + word + "' does not exist in the dictionary.");
+//            }
         }
     }
 
