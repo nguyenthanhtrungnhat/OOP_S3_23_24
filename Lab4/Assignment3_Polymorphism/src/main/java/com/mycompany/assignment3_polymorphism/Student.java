@@ -4,12 +4,16 @@
  */
 package com.mycompany.assignment3_polymorphism;
 
+import static com.mycompany.assignment3_polymorphism.Assignment3_Polymorphism.sc;
+import java.util.Vector;
+
 /**
  *
  * @author Dell
  */
 abstract class Student {
 
+    public Vector<Student> vector = new Vector();
     private String id;
     private String fullName;
     private int credit;
@@ -25,6 +29,23 @@ abstract class Student {
         this.averageScore = averageScore;
     }
 
-    
+    public String getId() {
+        return id;
+    }
 
+    public String getFullName() {
+        return fullName;
+    }
+
+    public int getCredit() {
+        return credit;
+    }
+
+    public double getAverageScore() {
+        return averageScore;
+    }
+
+    public abstract String getInfo();
+
+    
 }
