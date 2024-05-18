@@ -23,7 +23,7 @@ public class Assignment1_Dictionary {
             if (word.equalsIgnoreCase(".")) {
                 break;
             }
-            System.out.println("Hash Function!");
+            //     System.out.println("Hash Function!");
             if (dictionary.wordExists(word)) {
                 System.out.println("The meaning of '" + word + "' is: " + dictionary.findMeaning(word));
 
