@@ -4,6 +4,8 @@
  */
 package com.mycompany.assignment3_polymorphism;
 
+import java.util.Scanner;
+
 /**
  *
  * @author Dell
@@ -39,4 +41,14 @@ public class College_students extends Student {
         return studentInfo;
     }
 
+    public void addCollegeStudent() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("How many students?: ");
+        int n = sc.nextInt();
+        for (int i = 0; i < n; i++) {
+            super.Input();
+            System.out.print(" GraduationmExammScore: ");
+            graduationExamScore = sc.nextDouble();
+        }
+    }
 }

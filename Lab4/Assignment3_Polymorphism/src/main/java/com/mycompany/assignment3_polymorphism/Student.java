@@ -4,7 +4,7 @@
  */
 package com.mycompany.assignment3_polymorphism;
 
-import static com.mycompany.assignment3_polymorphism.Assignment3_Polymorphism.sc;
+import java.util.Scanner;
 import java.util.Vector;
 
 /**
@@ -13,11 +13,11 @@ import java.util.Vector;
  */
 abstract class Student {
 
-    public Vector<Student> vector = new Vector();
     private String id;
     private String fullName;
     private int credit;
     private double averageScore;
+    private Scanner sc = new Scanner(System.in);
 
     public Student() {
     }
@@ -47,5 +47,23 @@ abstract class Student {
 
     public abstract String getInfo();
 
-    
+    public void Input() {
+
+        System.out.print("Enter student ID: ");
+        String id = sc.next();
+        System.out.print("Enter student full name: ");
+        String fullName = sc.next();
+        System.out.print("Enter student credit: ");
+        int credit = sc.nextInt();
+        System.out.print("Enter student average score: ");
+        double averageScore = sc.nextDouble();
+    }
+
+    public void deleteById(Vector v) {
+        System.out.print("Enter id: ");
+        String temp = sc.next();
+        if (v.contains(temp)) {
+            v.remove(temp);
+        }
+    }
 }
