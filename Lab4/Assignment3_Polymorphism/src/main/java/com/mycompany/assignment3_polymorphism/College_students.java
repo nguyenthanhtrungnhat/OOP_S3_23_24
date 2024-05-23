@@ -22,7 +22,7 @@ public class College_students extends Student {
         this.graduationExamScore = graduationExamScore;
     }
 
-    public College_students(double graduationExamScore, String id, String fullName, int credit, double averageScore) {
+    public College_students(String id, String fullName, int credit, double averageScore, double graduationExamScore) {
         super(id, fullName, credit, averageScore);
         this.graduationExamScore = graduationExamScore;
     }

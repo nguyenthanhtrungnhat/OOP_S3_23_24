@@ -47,6 +47,7 @@ public class University_students extends Student {
         thesisScore = sc.nextDouble();
     }
 
+  
     @Override
     public void Output() {
         super.Output();

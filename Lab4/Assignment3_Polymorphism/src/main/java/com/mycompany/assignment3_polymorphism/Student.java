@@ -4,7 +4,7 @@
  */
 package com.mycompany.assignment3_polymorphism;
 
-import java.util.Scanner;
+import java.util.*;
 
 /**
  *
@@ -71,5 +71,17 @@ public class Student {
         }
         return true;
     }
+    public static Comparator<Student> compareClass = new Comparator<>() {
+        @Override
+        public int compare(Student a, Student b) {
+            if (a.getClass().toString().compareTo("class com.mycompany.assignment3_polymorphism.College_students") == 0 && b.getClass().toString().compareTo("class com.mycompany.assignment3_polymorphism.University_students") == 0) {
+                return -1;
+            } else if (a.getClass().toString().compareTo("class com.mycompany.assignment3_polymorphism.University_students") == 0 && b.getClass().toString().compareTo("class com.mycompany.assignment3_polymorphism.College_students") == 0) {
+                return 1;
+            } else {
+                return a.getId().compareTo(b.getId());
+            }
+        }
+    };
 
 }

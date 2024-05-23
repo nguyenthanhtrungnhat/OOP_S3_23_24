@@ -13,7 +13,7 @@ public class Assignment3_Polymorphism {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-
+        Manage m = new Manage();
         while (true) {
             System.out.println("Menu:");
             System.out.println(" 1. Add a new college student.");
@@ -27,7 +27,7 @@ public class Assignment3_Polymorphism {
 
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
-            Manage m = new Manage();
+
             switch (choice) {
                 case 1:
                     m.addCol();
@@ -46,10 +46,10 @@ public class Assignment3_Polymorphism {
                     m.printGraduation();
                     break;
                 case 6:
-                    //s  sortByTypeAndCode();
+                    m.sortByTypeAndCode();
                     break;
                 case 7:
-                    //   findByName();
+                    m.findByName();
                     break;
                 case 8:
                     System.out.println("Exiting...");

@@ -51,9 +51,8 @@ public class Manage {
     }
 
     public void sortByTypeAndCode() {
-        vector.sort((s1, s2) -> {
-            return s1.getId().compareTo(s2.getId());
-        });
+        vector.sort(Student.compareClass);
+        System.out.println("Success");
     }
 
     public void printGraduation() {
@@ -67,13 +66,20 @@ public class Manage {
         System.out.println("Number of eligible student: " + count);
     }
 
-    public void findName() {
+    public void findByName() {
         System.out.println("Enter name: ");
         String findName = sc.next();
+        boolean nameFound = false;
+
         for (int i = 0; i < vector.size(); i++) {
             if (vector.get(i).getFullName().equals(findName)) {
                 vector.get(i).Output();
+                nameFound = true;
             }
+        }
+
+        if (!nameFound) { 
+            System.out.println("Name not found.");
         }
     }
 }
