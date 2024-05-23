@@ -35,11 +35,16 @@ public class Manage {
 
         System.out.print("Enter ID to delete: ");
         String idToDelete = sc.next();
+        boolean idFound = false;
         for (int i = 0; i < vector.size(); i++) {
             if (vector.get(i).getId().equals(idToDelete)) {
                 vector.remove(i);
+                idFound = true;
                 System.out.println("Student with ID " + idToDelete + " has been removed.");
 
+            }
+            if (!idFound) {
+                System.out.println("ID not found.");
             }
         }
     }
@@ -78,7 +83,7 @@ public class Manage {
             }
         }
 
-        if (!nameFound) { 
+        if (!nameFound) {
             System.out.println("Name not found.");
         }
     }
