@@ -46,13 +46,13 @@ public class Student {
 
     public void Input() {
         System.out.print("Enter student ID: ");
-        String id = sc.next();
+        id = sc.next();
         System.out.print("Enter student full name: ");
-        String fullName = sc.next();
+        fullName = sc.next();
         System.out.print("Enter student credit: ");
-        int credit = sc.nextInt();
+        credit = sc.nextInt();
         System.out.print("Enter student average score: ");
-        double averageScore = sc.nextDouble();
+        averageScore = sc.nextDouble();
     }
 
     public void Output() {
