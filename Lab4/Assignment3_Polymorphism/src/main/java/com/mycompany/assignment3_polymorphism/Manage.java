@@ -20,13 +20,13 @@ public class Manage {
     }
 
     public void addUni() {
-        University_students university_students = new University_students();
+        Student university_students = new University_students();
         university_students.Input();
         vector.add(university_students);
     }
 
     public void addCol() {
-        College_students college_students = new College_students();
+        Student college_students = new College_students();
         college_students.Input();
         vector.add(college_students);
     }
