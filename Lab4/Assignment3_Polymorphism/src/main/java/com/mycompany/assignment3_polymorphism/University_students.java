@@ -37,7 +37,7 @@ public class University_students extends Student {
         return thesisScore;
     }
 
-    @Override
+    /*   @Override
     public String getInfo() {
         String studentInfo = "ID: " + getId() + "\n"
                 + "Full Name: " + getFullName() + "\n"
@@ -47,7 +47,7 @@ public class University_students extends Student {
                 + "Thesis Score: " + thesisScore;
         return studentInfo;
     }
-
+     */
     public void addUniversityStudent() {
         Scanner sc = new Scanner(System.in);
         System.out.print("How many students?: ");
@@ -59,7 +59,7 @@ public class University_students extends Student {
             System.out.print("Enter student thesis score: ");
             double thesisScore = sc.nextDouble();
         }
-        
+
     }
 
 }

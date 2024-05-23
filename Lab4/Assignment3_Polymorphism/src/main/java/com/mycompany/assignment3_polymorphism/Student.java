@@ -46,7 +46,7 @@ abstract class Student {
         return averageScore;
     }
 
-    public abstract String getInfo();
+  //  public abstract String getInfo();
 
     public void Input() {
 

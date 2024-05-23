@@ -13,21 +13,29 @@ import java.util.Vector;
  */
 public class Manage {
 
-    private Vector<Student> vector = new Vector();
+    private Vector<Student> vector = new Vector<>();
     private Scanner sc = new Scanner(System.in);
 
     public Manage() {
     }
 
     public void addUni() {
-        University_students university_students = new University_students();
-        university_students.addUniversityStudent();
+        //  University_students university_students = new University_students();
+        System.out.print("Enter student thesis name: ");
+        String thesisName = sc.next();
+        System.out.print("Enter student thesis score: ");
+        double thesisScore = sc.nextDouble();
+        
+        University_students university_students = new University_students(thesisName, thesisScore, id, fullName, credit, averageScore);
+        //   university_students.addUniversityStudent();
+
         vector.add(university_students);
     }
 
     public void addCol() {
+
         College_students college_students = new College_students();
-        college_students.addCollegeStudent();
+        //  college_students.addCollegeStudent();
         vector.add(college_students);
     }
 
@@ -46,13 +54,15 @@ public class Manage {
 
     public void printStudentList() {
         for (Student student : vector) {
-            System.out.println(student.getInfo());
+            System.out.println(student.getId() + " " + student.getFullName() + " " + student.getAverageScore() + " " + student.getCredit());
         }
     }
-    public void Function(){
-        
+
+    public void Function() {
+
     }
-    public void findName(){
-        
+
+    public void findName() {
+
     }
 }

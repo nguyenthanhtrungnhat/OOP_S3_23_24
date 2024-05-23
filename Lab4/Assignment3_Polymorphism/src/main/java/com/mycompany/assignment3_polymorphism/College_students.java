@@ -29,7 +29,7 @@ public class College_students extends Student {
     public double getGraduationExamScore() {
         return graduationExamScore;
     }
-
+    /*
     @Override
     public String getInfo() {
         // Assuming the Student class has the appropriate getters
@@ -51,4 +51,5 @@ public class College_students extends Student {
             graduationExamScore = sc.nextDouble();
         }
     }
+     */
 }
