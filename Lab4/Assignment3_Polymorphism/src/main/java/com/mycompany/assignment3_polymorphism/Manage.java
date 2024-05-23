@@ -50,11 +50,30 @@ public class Manage {
         }
     }
 
-    public void Function() {
+    public void sortByTypeAndCode() {
+        vector.sort((s1, s2) -> {
+            return s1.getId().compareTo(s2.getId());
+        });
+    }
 
+    public void printGraduation() {
+        int count = 0;
+        for (int i = 0; i < vector.size(); i++) {
+            if (vector.get(i).CheckGraduation()) {
+                vector.get(i).Output();
+                count++;
+            }
+        }
+        System.out.println("Number of eligible student: " + count);
     }
 
     public void findName() {
-
+        System.out.println("Enter name: ");
+        String findName = sc.next();
+        for (int i = 0; i < vector.size(); i++) {
+            if (vector.get(i).getFullName().equals(findName)) {
+                vector.get(i).Output();
+            }
+        }
     }
 }

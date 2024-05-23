@@ -43,7 +43,7 @@ public class Assignment3_Polymorphism {
                     m.printStudentList();
                     break;
                 case 5:
-                    //  printGraduation();
+                    m.printGraduation();
                     break;
                 case 6:
                     //s  sortByTypeAndCode();
@@ -59,5 +59,5 @@ public class Assignment3_Polymorphism {
             }
         }
     }
-   
+
 }
