@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class College_students extends Student {
 
     private double graduationExamScore;
+    private Scanner sc = new Scanner(System.in);
 
     public College_students() {
     }
@@ -29,27 +30,26 @@ public class College_students extends Student {
     public double getGraduationExamScore() {
         return graduationExamScore;
     }
-    /*
+
     @Override
-    public String getInfo() {
-        // Assuming the Student class has the appropriate getters
-        String studentInfo = "ID: " + getId() + "\n"
-                + "Full Name: " + getFullName() + "\n"
-                + "Credit: " + getCredit() + "\n"
-                + "Average Score: " + getAverageScore() + "\n"
-                + "Graduation Exam Score: " + graduationExamScore;
-        return studentInfo;
+    public void Input() {
+        super.Input();
+        System.out.print("Enter graduation exam score: ");
+        graduationExamScore = sc.nextDouble();
     }
 
-    public void addCollegeStudent() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("How many students?: ");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            super.Input();
-            System.out.print(" GraduationmExammScore: ");
-            graduationExamScore = sc.nextDouble();
-        }
+    @Override
+    public void Output() {
+        super.Output();
+        System.out.println("Graduation exam score: " + graduationExamScore);
     }
-     */
+
+    @Override
+    public boolean CheckGraduation() {
+        if (graduationExamScore < 5) {
+            return false;
+        }
+        return super.CheckGraduation();
+    }
+
 }

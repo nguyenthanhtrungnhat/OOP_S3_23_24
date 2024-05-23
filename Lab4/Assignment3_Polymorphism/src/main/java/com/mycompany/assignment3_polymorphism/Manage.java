@@ -20,22 +20,14 @@ public class Manage {
     }
 
     public void addUni() {
-        //  University_students university_students = new University_students();
-        System.out.print("Enter student thesis name: ");
-        String thesisName = sc.next();
-        System.out.print("Enter student thesis score: ");
-        double thesisScore = sc.nextDouble();
-        
-        University_students university_students = new University_students(thesisName, thesisScore, id, fullName, credit, averageScore);
-        //   university_students.addUniversityStudent();
-
+        University_students university_students = new University_students();
+        university_students.Input();
         vector.add(university_students);
     }
 
     public void addCol() {
-
         College_students college_students = new College_students();
-        //  college_students.addCollegeStudent();
+        college_students.Input();
         vector.add(college_students);
     }
 
@@ -53,8 +45,8 @@ public class Manage {
     }
 
     public void printStudentList() {
-        for (Student student : vector) {
-            System.out.println(student.getId() + " " + student.getFullName() + " " + student.getAverageScore() + " " + student.getCredit());
+        for (int i = 0; i < vector.size(); i++) {
+            vector.get(i).Output();
         }
     }
 

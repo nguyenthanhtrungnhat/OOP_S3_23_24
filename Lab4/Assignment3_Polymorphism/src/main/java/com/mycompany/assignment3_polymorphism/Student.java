@@ -5,20 +5,18 @@
 package com.mycompany.assignment3_polymorphism;
 
 import java.util.Scanner;
-import java.util.Vector;
 
 /**
  *
  * @author Dell
  */
-abstract class Student {
+public class Student {
 
     private String id;
     private String fullName;
     private int credit;
     private double averageScore;
     private Scanner sc = new Scanner(System.in);
-   
 
     public Student() {
     }
@@ -46,10 +44,7 @@ abstract class Student {
         return averageScore;
     }
 
-  //  public abstract String getInfo();
-
     public void Input() {
-
         System.out.print("Enter student ID: ");
         String id = sc.next();
         System.out.print("Enter student full name: ");
@@ -60,8 +55,21 @@ abstract class Student {
         double averageScore = sc.nextDouble();
     }
 
-    
+    public void Output() {
+        System.out.println("Student number: " + id);
+        System.out.println("Student name: " + fullName);
+        System.out.println("Number of credits: " + credit);
+        System.out.println("Average: " + averageScore);
+    }
 
-    
+    public boolean CheckGraduation() {
+        if (credit < 100) {
+            return false;
+        }
+        if (averageScore < 5) {
+            return false;
+        }
+        return true;
+    }
 
 }

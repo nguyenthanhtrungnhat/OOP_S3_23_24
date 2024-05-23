@@ -14,6 +14,7 @@ public class University_students extends Student {
 
     private String thesisName;
     private double thesisScore;
+    private Scanner sc = new Scanner(System.in);
 
     public University_students() {
     }
@@ -37,29 +38,28 @@ public class University_students extends Student {
         return thesisScore;
     }
 
-    /*   @Override
-    public String getInfo() {
-        String studentInfo = "ID: " + getId() + "\n"
-                + "Full Name: " + getFullName() + "\n"
-                + "Credit: " + getCredit() + "\n"
-                + "Average Score: " + getAverageScore() + "\n"
-                + "Thesis Name: " + thesisName + "\n"
-                + "Thesis Score: " + thesisScore;
-        return studentInfo;
+    @Override
+    public void Input() {
+        super.Input();
+        System.out.print("Enter thesis name: ");
+        thesisName = sc.next();
+        System.out.print("Enter thesis score: ");
+        thesisScore = sc.nextDouble();
     }
-     */
-    public void addUniversityStudent() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("How many students?: ");
-        int n = sc.nextInt();
-        for (int i = 0; i < n; i++) {
-            super.Input();
-            System.out.print("Enter student thesis name: ");
-            String thesisName = sc.next();
-            System.out.print("Enter student thesis score: ");
-            double thesisScore = sc.nextDouble();
-        }
 
+    @Override
+    public void Output() {
+        super.Output();
+        System.out.println("Thesis name: " + thesisName);
+        System.out.println("Thesis score: " + thesisScore);
+    }
+
+    @Override
+    public boolean CheckGraduation() {
+        if (thesisScore < 5) {
+            return false;
+        }
+        return super.CheckGraduation();
     }
 
 }
