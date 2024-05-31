@@ -19,7 +19,6 @@ public class Assignment1 {
         String filename = "C:\\tạm\\Student.dat";
         m.loadFile(filename);
         while (true) {
-            
             System.out.println("Menu:");
             System.out.println(" 1. Add a new college student.");
             System.out.println("2. Add a new university student.");
@@ -31,7 +30,6 @@ public class Assignment1 {
             System.out.println("8. Exit");
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
-            
             switch (choice) {
                 case 1:
                     m.addCol();
