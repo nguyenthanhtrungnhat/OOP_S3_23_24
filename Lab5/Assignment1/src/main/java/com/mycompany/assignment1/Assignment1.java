@@ -3,6 +3,7 @@
  */
 package com.mycompany.assignment1;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -12,9 +13,11 @@ import java.util.Scanner;
 public class Assignment1 {
 //lab5
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         Manage m = new Manage();
+        String filename = "C:\\tạm\\Student.dat";
+        m.loadFile(filename);
         while (true) {
             System.out.println("Menu:");
             System.out.println(" 1. Add a new college student.");
@@ -25,20 +28,21 @@ public class Assignment1 {
             System.out.println("6. Sort the student list ascending by Student type (College, university) and student code");
             System.out.println("7. Find student list by student's full name (Contains).");
             System.out.println("8. Exit");
-
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
-
+            
             switch (choice) {
                 case 1:
-                    m.ReadFileC();
+                    m.addCol();
+                    m.saveToFile(filename);
                     break;
                 case 2:
-                    m.ReadFileU();
+                    m.addUni();
+                   m.saveToFile(filename);
                     break;
                 case 3:
                     m.deleteById();
-                    m.WriteFile();
+                    m.saveToFile(filename);
                     break;
                 case 4:
                     m.printStudentList();
@@ -48,7 +52,7 @@ public class Assignment1 {
                     break;
                 case 6:
                     m.sortByTypeAndCode();
-                    m.WriteFile();
+                    m.saveToFile(filename);
                     break;
                 case 7:
                     m.findByName();

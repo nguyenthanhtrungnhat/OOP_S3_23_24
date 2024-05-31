@@ -4,13 +4,14 @@
  */
 package com.mycompany.assignment1;
 
+import java.io.Serializable;
 import java.util.*;
 
 /**
  *
  * @author Dell
  */
-public class Student  {
+public class Student implements Serializable{
     private String id;
     private String fullName;
     private int credit;

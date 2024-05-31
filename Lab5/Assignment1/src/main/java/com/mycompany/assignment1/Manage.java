@@ -4,7 +4,9 @@
  */
 package com.mycompany.assignment1;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -79,71 +81,65 @@ public class Manage {
         System.out.println("Enter name: ");
         String findName = sc.next();
         boolean nameFound = false;
-        StringBuilder sb = new StringBuilder();
         for (int i = 0; i < vector.size(); i++) {
             if (vector.get(i).getFullName().equals(findName)) {
                 vector.get(i).Output();
-                sb.append(vector.get(i)).append("\n");
                 nameFound = true;
+                System.out.println("Done");
+                try {
+                    FileOutputStream f = new FileOutputStream("C:\\tạm\\Result.dat");
+                    ObjectOutputStream fo = new ObjectOutputStream(f);
+                    for (Student st : vector) {
+                        if (st.getFullName().equals(findName)) {
+                            fo.writeObject(st);
+                        }
+                    }
+                    fo.close();
+                    f.close();
+                } catch (Exception e) {
+                    System.out.println(e);
+                }
             }
         }
-        try {
-            FileOutputStream f = new FileOutputStream("C:\\tạm\\Result.dat");
-            ObjectOutputStream ostream = new ObjectOutputStream(f);
-            ostream.writeObject(sb);
-            System.out.println("Done");
-            ostream.close();
-        } catch (IOException e) {
-            System.out.println("Error Write File");
+        if (nameFound == false) {
+            System.out.println("Name not found");
         }
-        if (!nameFound) {
-            System.out.println("Name not found.");
+
+    }
+
+    public void saveToFile(String fName) {
+        try {
+            FileOutputStream f = new FileOutputStream(fName);
+            ObjectOutputStream fo = new ObjectOutputStream(f);
+            for (Student st : vector) {
+                fo.writeObject(st);
+            }
+            fo.close();
+            f.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
-    public void WriteFile() {
-        try {
-            FileOutputStream f = new FileOutputStream("C:\\tạm\\student.dat");
-            ObjectOutputStream ostream = new ObjectOutputStream(f);
-            for (Student stu : vector) {
-                ostream.writeObject(stu);
-            }
-            System.out.println("Done");
-            ostream.close();
-        } catch (IOException e) {
-            System.out.println("Error Write File");
+    public void loadFile(String fname) throws FileNotFoundException, IOException {
+        if (!vector.isEmpty()) {
+            vector.clear();
         }
-    }
-
-    public void ReadFileU() {
         try {
-            FileInputStream f = new FileInputStream("C:\\tạm\\Ustudent.dat");
-            ObjectInputStream inStream = new ObjectInputStream(f);
-            Student s = null;
-            while ((s = (University_students) inStream.readObject()) != null) {
-                vector.add(s);
+            File f = new File(fname);
+            if (!f.exists()) {
+                return;
             }
-            System.out.println("Done");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class Not Found");
-        } catch (IOException e) {
-            System.out.println("Error Read File");
-        }
-    }
-
-    public void ReadFileC() {
-        try {
-            FileInputStream f = new FileInputStream("C:\\tạm\\Cstudent.dat");
-            ObjectInputStream inStream = new ObjectInputStream(f);
-            Student s = null;
-            while ((s = (College_students) inStream.readObject()) != null) {
-                vector.add(s);
+            FileInputStream fi = new FileInputStream(f);
+            ObjectInputStream fo = new ObjectInputStream(fi);
+            Student st;
+            while ((st = (Student) (fo.readObject())) != null) {
+                vector.add(st);
             }
-            System.out.println("Done");
-        } catch (ClassNotFoundException e) {
-            System.out.println("Class Not Found");
-        } catch (IOException e) {
-            System.out.println("Error Read File");
+            fo.close();
+            fi.close();
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 }
