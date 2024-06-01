@@ -11,4 +11,5 @@
         <maven.compiler.target>20</maven.compiler.target>
         <exec.mainClass>com.mycompany.mainframe.MainFrame</exec.mainClass>
     </properties>
+    <name>Assignment1</name>
 </project>
