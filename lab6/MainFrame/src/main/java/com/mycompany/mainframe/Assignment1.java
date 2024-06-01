@@ -9,7 +9,7 @@ package com.mycompany.mainframe;
  * @author Dell
  */
 import javax.swing.*;
-public class Main {
+public class Assignment1 {
 
     public static void main(String[] args) {
           try {
