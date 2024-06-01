@@ -27,6 +27,7 @@ public class MainFrame extends  JFrame{
         btnNewStudent.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 NewStudentDialog dialog = new NewStudentDialog(MainFrame.this, studentManager);
+                dialog.setModal(true);
                 dialog.setVisible(true);
             }
         });
