@@ -14,43 +14,28 @@ import java.util.Scanner;
  */
 public class StudentManager {
 
-    List<Student> list = new ArrayList<>();
-    Scanner sc = new Scanner(System.in);
-
-    /*i. Student findStudentById(String studentID): return a student with a specific id. Return null if 
-cannot found.
-ii. boolean addStudent(Student stu): if the added student’s id is existed in the database, return 
-false. Otherwise return true.
-iii. ArrayList<Student> getListStudent(): */    
-    public void findStudentById(String studentID) {
-        System.out.println("Enter id: ");
-        String foundId = sc.next();
-        for (int i = 0; i < list.size(); i++) {
-            if (foundId.equals(list.get(i).getStudentID())) {
-                System.out.println(list.get(i));
-            } else {
-                System.out.println("Not found!");
-            }
-        }
-    }
+    private ArrayList<Student> students = new ArrayList<>();
 
     public boolean addStudent(Student stu) {
-        for (int i = 0; i < list.size(); i++) {
-            if (stu.getStudentID().equals(list.get(i).getStudentID())) {
-                return false;
-            } else {
-                return true;
+        for (Student s : students) {
+            if (s.getStudentID().equals(stu.getStudentID())) {
+                return false; // Student ID already exists
             }
         }
-//        if(list.contains(stu.getStudentID()))
-//            return false;
-//        else
-//            return true;
+        students.add(stu);
+        return true;
     }
 
-    public void getListStudent() {
-        for (Student s : list) {
-            System.out.println(s.getStudentID() + " " + s.getFirstName() + " " + s.getMidName() + " " + s.getLastName() + " " + s.getGender() + " " + s.getSchoolStage());
+    public Student findStudentById(String studentID) {
+        for (Student s : students) {
+            if (s.getStudentID().equals(studentID)) {
+                return s;
+            }
         }
+        return null; // No student found
+    }
+
+    public ArrayList<Student> getListStudent() {
+        return students;
     }
 }

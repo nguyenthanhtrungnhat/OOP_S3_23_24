@@ -19,8 +19,8 @@ public class Student {
     private int yearOfBirth;
     private String gender;
     private String schoolStage;
-    Scanner sc = new Scanner(System.in);
 
+    // Constructor with all fields
     public Student(String studentID, String lastName, String midName, String firstName, int yearOfBirth, String gender, String schoolStage) {
         this.studentID = studentID;
         this.lastName = lastName;
@@ -31,9 +31,7 @@ public class Student {
         this.schoolStage = schoolStage;
     }
 
-    public Student() {
-    }
-
+    // Getters
     public String getStudentID() {
         return studentID;
     }
@@ -60,26 +58,5 @@ public class Student {
 
     public String getSchoolStage() {
         return schoolStage;
-    }
-
-    public Scanner getSc() {
-        return sc;
-    }
-
-    public void Input() {
-        System.out.print("Enter Id: ");
-        studentID = sc.next();
-        System.out.print("Enter Last Name: ");
-        lastName = sc.next();
-        System.out.print("Enter Mid Name: ");
-        midName = sc.next();
-        System.out.print("Enter First Name: ");
-        firstName = sc.next();
-        System.out.print("Enter Year of Birth: ");
-        yearOfBirth = sc.nextInt();
-        System.out.print("Enter Gender: ");
-        gender = sc.next();
-        System.out.print("Enter School State: ");
-        schoolStage = sc.next();
     }
 }

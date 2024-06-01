@@ -4,50 +4,48 @@
  */
 package com.mycompany.mainframe;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.GraphicsConfiguration;
-import java.awt.HeadlessException;
-import java.util.Locale;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 /**
  *
  * @author Dell
  */
-public class MainFrame extends JFrame {
-    private JButton btnCheckTotalStudent,btnNewStudent;
+import java.awt.FlowLayout;
+import javax.swing.*;
+import java.awt.event.*;
+public class MainFrame extends  JFrame{
+    private StudentManager studentManager = new StudentManager();
 
-    public MainFrame() throws HeadlessException {
+    public MainFrame(StudentManager studentManager1) {
+        setTitle("Student Management System");
+        setSize(400, 200);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setLayout(new FlowLayout());
+
+        JButton btnNewStudent = new JButton("New Student");
+        JButton btnCheckTotal = new JButton("Check Total Student");
+
+        btnNewStudent.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                NewStudentDialog dialog = new NewStudentDialog(MainFrame.this, studentManager);
+                dialog.setVisible(true);
+            }
+        });
+
+        btnCheckTotal.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(MainFrame.this,
+                    "Total Students: " + studentManager.getListStudent().size(),
+                    "Total Students", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        add(btnNewStudent);
+        add(btnCheckTotal);
     }
 
-    public MainFrame(GraphicsConfiguration gc) {
-        super(gc);
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            new MainFrame(new StudentManager()).setVisible(true);
+        });
     }
-
-    public MainFrame(String title) throws HeadlessException {
-        super(title);
-        btnCheckTotalStudent=new JButton("Check total student");
-        btnCheckTotalStudent.addActionListener((e)->{
-            JOptionPane.showMessageDialog(null, String.format(" There are students in list",2));
-             });
-        btnNewStudent=new JButton("New student");
-        this.setLayout(new BorderLayout());
-        JPanel panel1 =new JPanel();
-        panel1.setLayout(new FlowLayout());
-        panel1.add(btnCheckTotalStudent);
-        panel1.add(btnNewStudent);
-        this.add(panel1,BorderLayout.NORTH);
-        this.setSize(800,600);
-        this.setLocation(200,200);
-    }
-
-    public MainFrame(String title, GraphicsConfiguration gc) {
-        super(title, gc);
-    }
-
-  
 }
