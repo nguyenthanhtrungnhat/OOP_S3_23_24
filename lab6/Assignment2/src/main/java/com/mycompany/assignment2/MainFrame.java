@@ -72,7 +72,6 @@ public class MainFrame extends JFrame {
         panel.add(btnNewStudent);
         panel.add(btnCheckTotal);
         panel.add(refreshTableButton);
-        add(new JScrollPane(studentTable), BorderLayout.CENTER);
         add(panel, BorderLayout.NORTH);
         JScrollPane scrollPane = new JScrollPane(studentTable);
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
