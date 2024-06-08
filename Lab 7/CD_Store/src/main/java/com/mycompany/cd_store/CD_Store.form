@@ -105,6 +105,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Backup"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackupActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnRes">
           <Properties>
@@ -118,6 +121,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Refresh"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRefActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDel">
           <Properties>
@@ -136,7 +142,7 @@
         <Component class="javax.swing.JTable" name="tbTable">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
+              <Table columnCount="4" rowCount="0">
                 <Column editable="true" title="Title " type="java.lang.Object"/>
                 <Column editable="true" title="Collection" type="java.lang.Object"/>
                 <Column editable="true" title="Type" type="java.lang.Object"/>
@@ -171,6 +177,9 @@
               <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
             </Property>
           </Properties>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
+          </AuxValues>
         </Component>
       </SubComponents>
     </Container>

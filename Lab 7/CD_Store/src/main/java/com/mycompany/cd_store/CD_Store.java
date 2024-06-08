@@ -4,7 +4,21 @@
  */
 package com.mycompany.cd_store;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Locale;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -50,6 +64,11 @@ public class CD_Store extends javax.swing.JFrame {
         });
 
         btnBackup.setText("Backup");
+        btnBackup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackupActionPerformed(evt);
+            }
+        });
 
         btnRes.setText("Restore");
         btnRes.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +78,11 @@ public class CD_Store extends javax.swing.JFrame {
         });
 
         btnRef.setText("Refresh");
+        btnRef.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefActionPerformed(evt);
+            }
+        });
 
         btnDel.setText("Delete");
 
@@ -92,10 +116,7 @@ public class CD_Store extends javax.swing.JFrame {
 
         tbTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title ", "Collection", "Type", "Price"
@@ -144,13 +165,83 @@ public class CD_Store extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-      new JFrame().setVisible(true);
-    }//GEN-LAST:event_btnNewActionPerformed
 
+    private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
+        NewCDFormDialog ncd = new NewCDFormDialog(this, true);
+        ncd.setVisible(true);
+        ncd.pack();
+        ncd.setLocationRelativeTo(null);
+        ncd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }//GEN-LAST:event_btnNewActionPerformed
+    public static void AddRowToJtable(Object[] data) {
+        DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
+        d.addRow(data);
+
+    }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
-        // TODO add your handling code here:
+        String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
+        File file = new File(filePath);
+
+        try {
+            FileReader fr = new FileReader(file);
+            BufferedReader br = new BufferedReader(fr);
+
+            DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
+            Object[] lines = br.lines().toArray();
+
+            for (int i = 0; i < lines.length; i++) {
+                String[] row = lines[i].toString().split(" ");
+                model.addRow(row);
+            }
+
+        } catch (Exception ex) {
+            Logger.getLogger(NewCDFormDialog.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnResActionPerformed
+
+
+    private void btnRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefActionPerformed
+      
+    }//GEN-LAST:event_btnRefActionPerformed
+    
+    private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
+        btnBackup.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    //the file path
+                    File file = new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu");
+                    //if the file not exist create one
+                    if (!file.exists()) {
+                        file.createNewFile();
+                    }
+
+                    FileWriter fw = new FileWriter(file.getAbsoluteFile());
+                    BufferedWriter bw = new BufferedWriter(fw);
+
+                    //loop for jtable rows
+                    for (int i = 0; i < tbTable.getRowCount(); i++) {
+                        //loop for jtable column
+                        for (int j = 0; j < tbTable.getColumnCount(); j++) {
+                            bw.write(tbTable.getModel().getValueAt(i, j) + " ");
+                        }
+                        //break line at the begin 
+                        //break line at the end 
+                        bw.write("\n");
+                    }
+                    //close BufferedWriter
+                    bw.close();
+                    //close FileWriter 
+                    fw.close();
+                    JOptionPane.showMessageDialog(null, "Data Exported");
+
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+
+                }
+            }
+        });
+    }//GEN-LAST:event_btnBackupActionPerformed
 
     /**
      * @param args the command line arguments
@@ -197,7 +288,7 @@ public class CD_Store extends javax.swing.JFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tbTable;
+    private static javax.swing.JTable tbTable;
     private javax.swing.JTextField txtSearchBar;
     // End of variables declaration//GEN-END:variables
 }
