@@ -125,6 +125,11 @@ public class CD_Store extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbTable);
 
         btnSearch.setText("Search");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         txtSearchBar.setText("jTextField1");
 
@@ -176,32 +181,35 @@ public class CD_Store extends javax.swing.JFrame {
     public static void AddRowToJtable(Object[] data) {
         DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
         d.addRow(data);
-
+        
     }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
         String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
         File file = new File(filePath);
-
+        
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-
+            
             DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
             Object[] lines = br.lines().toArray();
-
+            
             for (int i = 0; i < lines.length; i++) {
                 String[] row = lines[i].toString().split(" ");
                 model.addRow(row);
+                
             }
-
+            
         } catch (Exception ex) {
             Logger.getLogger(NewCDFormDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnResActionPerformed
-
+    
 
     private void btnRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefActionPerformed
-      
+        DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
+        model.setRowCount(0);
+        model.addRow(data);
     }//GEN-LAST:event_btnRefActionPerformed
     
     private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
@@ -215,7 +223,7 @@ public class CD_Store extends javax.swing.JFrame {
                     if (!file.exists()) {
                         file.createNewFile();
                     }
-
+                    
                     FileWriter fw = new FileWriter(file.getAbsoluteFile());
                     BufferedWriter bw = new BufferedWriter(fw);
 
@@ -234,14 +242,18 @@ public class CD_Store extends javax.swing.JFrame {
                     //close FileWriter 
                     fw.close();
                     JOptionPane.showMessageDialog(null, "Data Exported");
-
+                    
                 } catch (Exception ex) {
                     ex.printStackTrace();
-
+                    
                 }
             }
         });
     }//GEN-LAST:event_btnBackupActionPerformed
+
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnSearchActionPerformed
 
     /**
      * @param args the command line arguments

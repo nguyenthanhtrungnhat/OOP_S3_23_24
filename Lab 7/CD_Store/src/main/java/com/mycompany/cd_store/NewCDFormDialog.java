@@ -124,11 +124,11 @@ public class NewCDFormDialog extends javax.swing.JDialog {
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         // TODO add your handling code here:
-        if(txtTitle.getText().equals("")||txtCollection.getText().equals("")||txtPrice.getText().equals("")||txtPrice.getText().equals("")){
+        if (txtTitle.getText().equals("") || txtCollection.getText().equals("") || txtPrice.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter data!");
-        }else{
-            Object data[]={txtTitle.getText(),txtCollection.getText(),txtType.getText(),txtPrice.getText()};
-            CD_Store .AddRowToJtable(data);
+        } else {
+            Object data[] = {txtTitle.getText(), txtCollection.getText(), txtType.getText(), txtPrice.getText()};
+            CD_Store.AddRowToJtable(data);
             JOptionPane.showMessageDialog(this, "Added..!");
             txtTitle.setText("");
             txtCollection.setText("");
@@ -136,8 +136,9 @@ public class NewCDFormDialog extends javax.swing.JDialog {
             txtPrice.setText("");
 
         }
-        
+
     }//GEN-LAST:event_btnSaveActionPerformed
+   
 
     /**
      * @param args the command line arguments
