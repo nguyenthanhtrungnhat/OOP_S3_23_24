@@ -189,14 +189,14 @@ public class CD_Store extends javax.swing.JFrame {
         ncd.setLocationRelativeTo(null);
         ncd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnNewActionPerformed
-//    public static void AddRowToJtable(Object[] data) {
-//        DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
-//        d.addRow(data);
-//    }
-     public static void AddRowToJtable(Vector v) {
+    public static void AddRowToJtable(Object[] data) {
         DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
-        d.addRow(v);
+        d.addRow(data);
     }
+//     public static void AddRowToJtable(Vector v) {
+//        DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
+//        d.addRow(v);
+//    }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
         String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
         File file = new File(filePath);
