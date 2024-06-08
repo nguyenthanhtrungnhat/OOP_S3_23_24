@@ -85,6 +85,11 @@ public class CD_Store extends javax.swing.JFrame {
         });
 
         btnDel.setText("Delete");
+        btnDel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -181,37 +186,36 @@ public class CD_Store extends javax.swing.JFrame {
     public static void AddRowToJtable(Object[] data) {
         DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
         d.addRow(data);
-        
+
     }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
         String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
         File file = new File(filePath);
-        
+
         try {
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            
+
             DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
             Object[] lines = br.lines().toArray();
-            
+
             for (int i = 0; i < lines.length; i++) {
                 String[] row = lines[i].toString().split(" ");
                 model.addRow(row);
-                
+
             }
-            
+
         } catch (Exception ex) {
             Logger.getLogger(NewCDFormDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnResActionPerformed
-    
+
 
     private void btnRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefActionPerformed
         DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
-        model.setRowCount(0);
-        model.addRow(data);
+        model.fireTableDataChanged();
     }//GEN-LAST:event_btnRefActionPerformed
-    
+
     private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
         btnBackup.addActionListener(new ActionListener() {
             @Override
@@ -223,7 +227,7 @@ public class CD_Store extends javax.swing.JFrame {
                     if (!file.exists()) {
                         file.createNewFile();
                     }
-                    
+
                     FileWriter fw = new FileWriter(file.getAbsoluteFile());
                     BufferedWriter bw = new BufferedWriter(fw);
 
@@ -242,10 +246,10 @@ public class CD_Store extends javax.swing.JFrame {
                     //close FileWriter 
                     fw.close();
                     JOptionPane.showMessageDialog(null, "Data Exported");
-                    
+
                 } catch (Exception ex) {
                     ex.printStackTrace();
-                    
+
                 }
             }
         });
@@ -254,6 +258,21 @@ public class CD_Store extends javax.swing.JFrame {
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
+        if (tbTable.getSelectedRowCount()== 1) {
+            model.removeRow(tbTable.getSelectedRow());
+        } else {
+            if (tbTable.getRowCount()== 0) {
+                JOptionPane.showMessageDialog(this, "Table is empty");
+            } else {
+                JOptionPane.showMessageDialog(this, "Row is not selected");
+            }
+        }
+
+
+    }//GEN-LAST:event_btnDelActionPerformed
 
     /**
      * @param args the command line arguments
