@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Locale;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
@@ -139,6 +140,11 @@ public class CD_Store extends javax.swing.JFrame {
         txtSearchBar.setText("jTextField1");
 
         Combobox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Title", "Collection", "Type", "Price" }));
+        Combobox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboboxActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -183,10 +189,13 @@ public class CD_Store extends javax.swing.JFrame {
         ncd.setLocationRelativeTo(null);
         ncd.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }//GEN-LAST:event_btnNewActionPerformed
-    public static void AddRowToJtable(Object[] data) {
+//    public static void AddRowToJtable(Object[] data) {
+//        DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
+//        d.addRow(data);
+//    }
+     public static void AddRowToJtable(Vector v) {
         DefaultTableModel d = (DefaultTableModel) tbTable.getModel();
-        d.addRow(data);
-
+        d.addRow(v);
     }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
         String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
@@ -261,10 +270,10 @@ public class CD_Store extends javax.swing.JFrame {
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
-        if (tbTable.getSelectedRowCount()== 1) {
+        if (tbTable.getSelectedRowCount() == 1) {
             model.removeRow(tbTable.getSelectedRow());
         } else {
-            if (tbTable.getRowCount()== 0) {
+            if (tbTable.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "Table is empty");
             } else {
                 JOptionPane.showMessageDialog(this, "Row is not selected");
@@ -273,6 +282,19 @@ public class CD_Store extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_btnDelActionPerformed
+
+    private void ComboboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboboxActionPerformed
+        // TODO add your handling code here:
+        if (Combobox.getSelectedItem().equals("Title")) {
+           // String data = tbTable.getR;
+        } else if (Combobox.getSelectedItem().equals("Collection")) {
+            String data = "";
+        } else if (Combobox.getSelectedItem().equals("Tpye")) {
+
+        } else if (Combobox.getSelectedItem().equals("Price")) {
+
+        }
+    }//GEN-LAST:event_ComboboxActionPerformed
 
     /**
      * @param args the command line arguments

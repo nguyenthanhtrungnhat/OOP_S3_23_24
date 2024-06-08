@@ -4,6 +4,7 @@
  */
 package com.mycompany.cd_store;
 
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -127,8 +128,17 @@ public class NewCDFormDialog extends javax.swing.JDialog {
         if (txtTitle.getText().equals("") || txtCollection.getText().equals("") || txtPrice.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter data!");
         } else {
-            Object data[] = {txtTitle.getText(), txtCollection.getText(), txtType.getText(), txtPrice.getText()};
-            CD_Store.AddRowToJtable(data);
+            Vector<ObjectCd> v=new Vector<>();
+            //   Object data[] = {txtTitle.getText(), txtCollection.getText(), txtType.getText(), txtPrice.getText()};
+            ObjectCd ocd = new ObjectCd();
+            ocd.setTitle(txtTitle.getText());
+            ocd.setColletion(txtCollection.getText());
+            ocd.setType(txtType.getText());
+            ocd.setPrice(txtPrice.getText());
+            v.add(ocd);
+            CD_Store.AddRowToJtable(v);
+            
+            // CD_Store.AddRowToJtable(data);
             JOptionPane.showMessageDialog(this, "Added..!");
             txtTitle.setText("");
             txtCollection.setText("");
@@ -138,7 +148,6 @@ public class NewCDFormDialog extends javax.swing.JDialog {
         }
 
     }//GEN-LAST:event_btnSaveActionPerformed
-   
 
     /**
      * @param args the command line arguments
