@@ -5,6 +5,9 @@
 package com.mycompany.assignment5lab6;
 
 import com.mycompany.assignment4lab6.CDManager;
+import java.util.List;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -49,23 +52,42 @@ public class MainFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setText("ID");
 
-        jLabel2.setText("jLabel2");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel2.setText("Title");
 
-        jLabel3.setText("jLabel3");
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel3.setText("Collection");
 
-        jLabel4.setText("jLabel4");
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel4.setText("Type");
 
-        jLabel5.setText("jLabel5");
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel5.setText("Price");
 
-        jLabel6.setText("jLabel6");
+        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel6.setText("Price");
 
+        btnClear.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnClear.setText("Clear");
         btnClear.setToolTipText("");
+        btnClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearActionPerformed(evt);
+            }
+        });
 
+        btnShow.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnShow.setText("Show all");
+        btnShow.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnShowActionPerformed(evt);
+            }
+        });
 
+        btnAdd.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnAdd.setText("Add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +117,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(btnClear)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 74, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
                                 .addComponent(btnShow)
                                 .addGap(43, 43, 43))))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -140,16 +162,45 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(btnClear)
                     .addComponent(btnShow)
                     .addComponent(btnAdd))
-                .addContainerGap(97, Short.MAX_VALUE))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-       c.getId() = txtId.getText();
-       
+        try {
+            String id = txtId.getText();
+            String title = txtName.getText();
+            String collection = txtCollection.getText();
+            String type = txtType.getText();
+            double price = Double.parseDouble(txtPrice.getText());
+            int yearOfRelease = Integer.parseInt(txtYearOfRelease.getText());
+            CDManager cDManager = new CDManager(id, title, collection, type, price, yearOfRelease);
+            c.getList().add(cDManager);
+            JOptionPane.showMessageDialog(null, "Data added successfully!");
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Invalid data entered. Please enter a valid price and year of release.");
+        }
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
+        txtId.setText(" ");
+        txtName.setText(" ");
+        txtCollection.setText(" ");
+        txtType.setText(" ");
+        txtPrice.setText(" ");
+        txtYearOfRelease.setText(" ");
+    }//GEN-LAST:event_btnClearActionPerformed
+
+
+    private void btnShowActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnShowActionPerformed
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < c.getList().size(); i++) {
+            sb.append(c.getList().get(i).getId()).append(" ").append(c.getList().get(i).getTitle()).append(" ").append(c.getList().get(i).getCollection()).append(" ").append(c.getList().get(i).getType()).append(" ").append(c.getList().get(i).getPrice()).append(" ").append(c.getList().get(i).getYearOfRelease()).append("\n");
+        }
+        JOptionPane.showMessageDialog(null, sb);
+    }//GEN-LAST:event_btnShowActionPerformed
 
     /**
      * @param args the command line arguments
