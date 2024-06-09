@@ -36,8 +36,7 @@ public class MainFrame extends javax.swing.JFrame {
         cbPool = new javax.swing.JCheckBox();
         myCombobox = new javax.swing.JComboBox<>();
         jButton1 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
+        labelResult = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,6 +51,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel4.setText("Guest name:");
+
+        txtName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNameActionPerformed(evt);
+            }
+        });
 
         cbBreakfast.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         cbBreakfast.setSelected(true);
@@ -74,11 +79,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel5.setText("Hello");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jLabel6.setText("your payment is ");
+        labelResult.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -88,31 +89,29 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jLabel4)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGap(0, 0, Short.MAX_VALUE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(myCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(57, 57, 57)
+                                            .addComponent(jButton1)
+                                            .addGap(2, 2, 2))
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(cbBreakfast)
+                                            .addGap(52, 52, 52)
+                                            .addComponent(cbGolf)
+                                            .addGap(89, 89, 89)))
+                                    .addComponent(cbPool)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addGap(125, 125, 125)
-                                                .addComponent(jLabel6))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(myCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(57, 57, 57)
-                                                .addComponent(jButton1)))
-                                        .addGap(2, 2, 2))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(cbBreakfast)
-                                        .addGap(52, 52, 52)
-                                        .addComponent(cbGolf)
-                                        .addGap(89, 89, 89)))
-                                .addComponent(cbPool))))
+                                .addGap(2, 2, 2)
+                                .addComponent(labelResult, javax.swing.GroupLayout.PREFERRED_SIZE, 453, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(jLabel1))
@@ -146,10 +145,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(myCombobox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
                 .addGap(31, 31, 31)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addComponent(labelResult)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         pack();
@@ -163,9 +160,9 @@ public class MainFrame extends javax.swing.JFrame {
         double discount = 0;
         double extra = 0;
         String selectedOption = (String) myCombobox.getSelectedItem();
-        if ("Weekdays".equals(selectedOption)) {
+        if ("Weekdays (-10%)".equals(selectedOption)) {
             discount = 10;
-        } else if ("Weekends".equals(selectedOption)) {
+        } else if ("Weekends (+30%)".equals(selectedOption)) {
             extra = 30;
         }
 
@@ -185,7 +182,11 @@ public class MainFrame extends javax.swing.JFrame {
         if (extra > 0) {
             result += result * extra / 100;
         }
+        labelResult.setText("Hello "+txtName.getText()+" your payment is "+result);
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
+    }//GEN-LAST:event_txtNameActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,8 +232,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel labelResult;
     private javax.swing.JComboBox<String> myCombobox;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
