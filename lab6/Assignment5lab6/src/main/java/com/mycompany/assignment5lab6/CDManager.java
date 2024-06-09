@@ -29,4 +29,28 @@ public class CDManager {
         this.yearOfRelease = yearOfRelease;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getCollection() {
+        return collection;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public int getYearOfRelease() {
+        return yearOfRelease;
+    }
+
 }
