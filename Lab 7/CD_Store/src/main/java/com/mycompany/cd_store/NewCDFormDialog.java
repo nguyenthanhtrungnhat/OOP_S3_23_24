@@ -4,7 +4,8 @@
  */
 package com.mycompany.cd_store;
 
-import java.util.Vector;
+import java.io.*;
+import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
@@ -52,19 +53,11 @@ public class NewCDFormDialog extends javax.swing.JDialog {
             }
         });
 
-        txtTitle.setText("jTextField1");
-
         jLabel2.setText("Colection");
-
-        txtCollection.setText("jTextField2");
 
         jLabel3.setText("Type");
 
-        txtType.setText("jTextField3");
-
         jLabel4.setText("Price");
-
-        txtPrice.setText("jTextField4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -124,29 +117,33 @@ public class NewCDFormDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        // TODO add your handling code here:
         if (txtTitle.getText().equals("") || txtCollection.getText().equals("") || txtPrice.getText().equals("") || txtPrice.getText().equals("")) {
             JOptionPane.showMessageDialog(this, "Please enter data!");
         } else {
-            // Vector<ObjectCd> v=new Vector<>();
             Object data[] = {txtTitle.getText(), txtCollection.getText(), txtType.getText(), txtPrice.getText()};
-//            ObjectCd ocd = new ObjectCd();
-//            ocd.setTitle(txtTitle.getText());
-//            ocd.setColletion(txtCollection.getText());
-//            ocd.setType(txtType.getText());
-//            ocd.setPrice(txtPrice.getText());
-//            v.add(ocd);
-//            CD_Store.AddRowToJtable(v);
-//            
+
             CD_Store.AddRowToJtable(data);
             JOptionPane.showMessageDialog(this, "Added..!");
-            txtTitle.setText("");
-            txtCollection.setText("");
-            txtType.setText("");
-            txtPrice.setText("");
+            try {
+            File file = new File("C:\\Users\\Dell\\Documents\\New Folder\\NewCD.eiu");
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true); // Open in append mode
+            BufferedWriter bw = new BufferedWriter(fw);
 
+            bw.write(txtTitle.getText() + " ");
+            bw.write(txtCollection.getText() + " ");
+            bw.write(txtType.getText() + " ");
+            bw.write(txtPrice.getText() + "\n");
+
+            // Close BufferedWriter
+            bw.close();
+            // Close FileWriter
+            fw.close();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-
+            dispose();
+        }
     }//GEN-LAST:event_btnSaveActionPerformed
 
     /**

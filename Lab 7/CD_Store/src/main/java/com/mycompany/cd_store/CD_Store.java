@@ -8,12 +8,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
+import java.io.*;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
+import java.util.*;
 import java.util.Map;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -134,7 +137,7 @@ public class CD_Store extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title ", "Collection", "Type", "Price"
+                "Title", "Collection", "Type", "Price"
             }
         ));
         jScrollPane1.setViewportView(tbTable);
@@ -152,8 +155,6 @@ public class CD_Store extends javax.swing.JFrame {
                 ComboboxActionPerformed(evt);
             }
         });
-
-        txtSearchBar.setText("jTextField1");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -207,70 +208,101 @@ public class CD_Store extends javax.swing.JFrame {
 //        d.addRow(v);
 //    }
     private void btnResActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResActionPerformed
-        String filePath = "C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu";
-        File file = new File(filePath);
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setDialogTitle("Select a file to restore");
+        fileChooser.setSelectedFile(new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu"));
+        int userSelection = fileChooser.showOpenDialog(null);
 
-        try {
-            FileReader fr = new FileReader(file);
-            BufferedReader br = new BufferedReader(fr);
+        if (userSelection == JFileChooser.APPROVE_OPTION) {
+            File file = fileChooser.getSelectedFile();
 
-            DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
-            Object[] lines = br.lines().toArray();
+            try {
+                FileReader fr = new FileReader(file);
+                BufferedReader br = new BufferedReader(fr);
 
-            for (int i = 0; i < lines.length; i++) {
-                String[] row = lines[i].toString().split(" ");
-                model.addRow(row);
+                DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
+                model.setRowCount(0); // Clear existing data in the table if any
 
+                Object[] lines = br.lines().toArray();
+                for (int i = 0; i < lines.length; i++) {
+                    String[] row = lines[i].toString().split(" ");
+                    model.addRow(row);
+                }
+
+                br.close();
+                fr.close();
+
+            } catch (Exception ex) {
+                Logger.getLogger(NewCDFormDialog.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-        } catch (Exception ex) {
-            Logger.getLogger(NewCDFormDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btnResActionPerformed
 
 
     private void btnRefActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefActionPerformed
         DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
-        model.fireTableDataChanged();
+        model.setRowCount(0); // Clear the table
+
+        // Read the data from the file and populate the table
+        try {
+            File file = new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu");
+            Scanner scanner = new Scanner(file);
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                String[] data = line.split(" ");
+                model.addRow(data);
+            }
+
+            scanner.close();
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+
+        txtSearchBar.setText(""); // Clear txtSearchBar
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+        tbTable.setRowSorter(sorter);
     }//GEN-LAST:event_btnRefActionPerformed
 
     private void btnBackupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackupActionPerformed
-        btnBackup.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    //the file path
-                    File file = new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu");
-                    //if the file not exist create one
-                    if (!file.exists()) {
-                        file.createNewFile();
+
+        try {
+            // Create a file chooser
+            JFileChooser fileChooser = new JFileChooser();
+            fileChooser.setDialogTitle("Specify a file to save");
+
+            // Set the default file name
+            fileChooser.setSelectedFile(new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu"));
+
+            // Show save dialog; this method does not return until the dialog is closed
+            int userSelection = fileChooser.showSaveDialog(null);
+
+            if (userSelection == JFileChooser.APPROVE_OPTION) {
+                File fileToSave = fileChooser.getSelectedFile();
+
+                FileWriter fw = new FileWriter(fileToSave.getAbsoluteFile());
+                BufferedWriter bw = new BufferedWriter(fw);
+
+                // Loop through jtable rows
+                for (int i = 0; i < tbTable.getRowCount(); i++) {
+                    // Loop through jtable columns
+                    for (int j = 0; j < tbTable.getColumnCount(); j++) {
+                        bw.write(tbTable.getModel().getValueAt(i, j) + " ");
                     }
-
-                    FileWriter fw = new FileWriter(file.getAbsoluteFile());
-                    BufferedWriter bw = new BufferedWriter(fw);
-
-                    //loop for jtable rows
-                    for (int i = 0; i < tbTable.getRowCount(); i++) {
-                        //loop for jtable column
-                        for (int j = 0; j < tbTable.getColumnCount(); j++) {
-                            bw.write(tbTable.getModel().getValueAt(i, j) + " ");
-                        }
-                        //break line at the begin 
-                        //break line at the end 
-                        bw.write("\n");
-                    }
-                    //close BufferedWriter
-                    bw.close();
-                    //close FileWriter 
-                    fw.close();
-                    JOptionPane.showMessageDialog(null, "Data Exported");
-
-                } catch (Exception ex) {
-                    ex.printStackTrace();
-
+                    // Break line at the end of each row
+                    bw.write("\n");
                 }
+                // Close BufferedWriter
+                bw.close();
+                // Close FileWriter 
+                fw.close();
+                JOptionPane.showMessageDialog(null, "Data Exported");
+
             }
-        });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
     }//GEN-LAST:event_btnBackupActionPerformed
     private int getColumnIndexByName(String columnName, DefaultTableModel model) {
         for (int i = 0; i < model.getColumnCount(); i++) {
@@ -278,27 +310,66 @@ public class CD_Store extends javax.swing.JFrame {
                 return i;
             }
         }
-        return -1; // Column not found
+        return -1; // Return -1 if the column is not found
     }
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
-        tbTable.setRowSorter(sorter);
+        try {
+            DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
+            TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(model);
+            tbTable.setRowSorter(sorter);
 
-        String selectedColumn = (String) Combobox.getSelectedItem(); // Get the selected column name
-        int columnIndex = getColumnIndexByName(selectedColumn, model); // Get the column index
+            if (model.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "The table is empty.");
+                return; // Exit the method if the table is empty
+            }
 
-        if (columnIndex != -1) {
-            sorter.setRowFilter(RowFilter.regexFilter(txtSearchBar.getText(), columnIndex));
-        } else {
-            sorter.setRowFilter(null); // Clear the filter
+            String selectedColumn = (String) Combobox.getSelectedItem(); // Get the selected column name
+            int columnIndex = getColumnIndexByName(selectedColumn, model); // Get the column index
+
+            // Check if the search bar is empty
+            if (txtSearchBar.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(null, "Please enter a search query.");
+                return; // Exit the method without performing the search
+            }
+
+            // Set up the row filter based on the search text and selected column
+            if (columnIndex != -1) {
+                RowFilter<DefaultTableModel, Object> rowFilter = RowFilter.regexFilter("^" + txtSearchBar.getText() + "$", columnIndex);
+                sorter.setRowFilter(rowFilter);
+            } else {
+                sorter.setRowFilter(null); // Clear the filter if columnIndex is invalid
+            }
+            // Save the filtered data to a file
+            try (PrintWriter writer = new PrintWriter(new File("C:\\Users\\Dell\\Documents\\New Folder\\Result.eiu"))) {
+                for (int i = 0; i < sorter.getViewRowCount(); i++) {
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        writer.print(model.getValueAt(sorter.convertRowIndexToModel(i), j) + "\t");
+                    }
+                    writer.println();
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Table is empty: " + ex.getMessage());
         }
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void btnDelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelActionPerformed
         DefaultTableModel model = (DefaultTableModel) tbTable.getModel();
         if (tbTable.getSelectedRowCount() == 1) {
-            model.removeRow(tbTable.getSelectedRow());
+            // Remove row from table
+            int selectedRow = tbTable.getSelectedRow();
+            model.removeRow(selectedRow); // Update file
+            try {
+                File file = new File("C:\\Users\\Dell\\Documents\\New Folder\\CD.eiu");
+                List<String> lines = new ArrayList<>(Files.readAllLines(file.toPath()));
+                lines.remove(selectedRow);
+                Files.write(file.toPath(), lines);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } else {
             if (tbTable.getRowCount() == 0) {
                 JOptionPane.showMessageDialog(this, "Table is empty");
@@ -306,7 +377,6 @@ public class CD_Store extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "Row is not selected");
             }
         }
-
 
     }//GEN-LAST:event_btnDelActionPerformed
 
